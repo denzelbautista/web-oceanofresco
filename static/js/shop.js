@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const container = document.getElementById('productos-container');
     const pagination = document.querySelector('.pagination');
     const itemsPerPage = 12;
@@ -26,35 +26,38 @@ document.addEventListener('DOMContentLoaded', function() {
         const start = (currentPage - 1) * itemsPerPage;
         const end = start + itemsPerPage;
         const paginatedProductos = productos.slice(start, end);
-    
+
         paginatedProductos.forEach(producto => {
             const productoDiv = document.createElement('div');
-            productoDiv.className = 'product-card';
-    
-            productoDiv.innerHTML = `
-                <div class="item">
-                    <div class="thumb">
-                        <img class="product-image" src="${producto.imagen_producto}" alt="${producto.nombre}">
+            if (producto.stock >= 1) {
+                productoDiv.className = 'product-card';
+
+                productoDiv.innerHTML = `
+                    <div class="item">
+                        <div class="thumb">
+                            <img class="product-image" src="${producto.imagen_producto}" alt="${producto.nombre}">
+                        </div>
+                        <div class="down-content">
+                            <span class="product-category">${producto.categoria}</span>
+                            <h4 class="product-name">${producto.nombre}</h4>
+                            <span class="product-price">S/. ${producto.precio}</span>
+                            <button class="buy-button" data-id="${producto.id}">Comprar</button>
+                        </div>
                     </div>
-                    <div class="down-content">
-                        <span class="product-category">${producto.categoria}</span>
-                        <h4 class="product-name">${producto.nombre}</h4>
-                        <span class="product-price">S/. ${producto.precio}</span>
-                        <button class="buy-button" data-id="${producto.id}">Comprar</button>
-                    </div>
-                </div>
-            `;
-            container.appendChild(productoDiv);
+                `;
+                container.appendChild(productoDiv);
+
+            }
         });
-    
+
         document.querySelectorAll('.buy-button').forEach(button => {
-            button.addEventListener('click', function() {
+            button.addEventListener('click', function () {
                 const productId = this.getAttribute('data-id');
                 window.location.href = `/detallesproducto?id=${productId}`;
             });
         });
     }
-    
+
 
     function setupPagination() {
         pagination.innerHTML = '';
@@ -66,7 +69,7 @@ document.addEventListener('DOMContentLoaded', function() {
             a.textContent = i;
             a.href = '#';
             if (i === currentPage) a.classList.add('is_active');
-            a.addEventListener('click', function(e) {
+            a.addEventListener('click', function (e) {
                 e.preventDefault();
                 currentPage = i;
                 renderProductos();
