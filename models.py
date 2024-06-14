@@ -116,3 +116,12 @@ class Compra(db.Model):
     productos = db.Column(db.Text, nullable=False)  # Almacena los ids de los productos comprados como una cadena separada por comas
     monto = db.Column(db.Float, nullable=False)
     fecha = db.Column(db.DateTime, default=datetime.utcnow)
+
+
+class Suscriptor(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(120), unique=True, nullable=False)
+    is_subscribed = db.Column(db.Boolean, default=True, nullable=False)
+
+    def __repr__(self):
+        return f'<Suscriptor {self.email}>'

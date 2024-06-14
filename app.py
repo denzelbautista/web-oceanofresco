@@ -1,14 +1,15 @@
 # main.py
-from flask import Flask, request, jsonify, abort
+from flask import Flask, request, jsonify, abort, redirect, url_for
 import sys
 from database import init_app, db
 from config.local import config
 from flask import Flask, send_file, render_template
 import requests
+import json
 # flask-login
 from flask_login import LoginManager, login_user, logout_user, login_required, current_user
 # end flask-login
-from models import Usuario, Comentario, Producto, Compra
+from models import Usuario, Comentario, Producto, Compra, Suscriptor
 from views import views_bp
 from users_controller import users_bp
 
@@ -125,29 +126,6 @@ def get_producto(id):
         print(sys.exc_info())
         return jsonify({'success': False, 'message': 'Error obteniendo producto'}), 500
 
-    try:
-        data = request.json
-        # Extrae los campos necesarios del JSON
-
-        # Verifica si el pedido existe
-        pedido = Pedido.query.get(pedido_id)
-        if not pedido:
-            return jsonify({'success': False, 'message': 'Pedido no encontrado'}), 404
-
-        # Crea una nueva línea de pedido
-        # Completa con los campos adecuados
-        nueva_linea_pedido = LineaPedido(...)
-        db.session.add(nueva_linea_pedido)
-        db.session.commit()
-
-        return jsonify({'success': True, 'message': 'Línea de pedido creada correctamente'}), 201
-    except Exception as e:
-        print(sys.exc_info())
-        db.session.rollback()
-        return jsonify({'success': False, 'message': 'Error creando línea de pedido'}), 500
-    finally:
-        db.session.close()
-
 @app.route('/productos/<producto_id>', methods=['PATCH'])
 def update_stock(producto_id):
     producto = Producto.query.get_or_404(producto_id)
@@ -199,6 +177,26 @@ def registrar_compra():
     db.session.commit()
 
     return jsonify({'success': True, 'message': 'Compra registrada'}), 201
+
+
+@app.route('/agregar_correo', methods=['POST'])
+def agregar_correo():
+    correo = request.form['correo']
+    suscriptor_existente = Suscriptor.query.filter_by(email=correo).first()
+    if not suscriptor_existente:
+        nuevo_suscriptor = Suscriptor(email=correo)
+        db.session.add(nuevo_suscriptor)
+        db.session.commit()
+        return jsonify({"mensaje": "Correo agregado exitosamente"}), 200
+    else:
+        # Si el correo ya existe, simplemente devuelve una respuesta exitosa.
+        return jsonify({"mensaje": "Correo ya existente, no se realizó ninguna acción"}), 200
+    
+@app.route('/obtener_correos/12457', methods=['GET'])
+def obtener_correos():
+    suscriptores = Suscriptor.query.all()
+    correos = [suscriptor.email for suscriptor in suscriptores]
+    return jsonify({"correos": correos}), 200
 
 
 if __name__ == '__main__':
