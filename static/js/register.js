@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 inputs.forEach(input => input.classList.remove('valid'));
                 submitButton.disabled = true;
             } else {
-                alert('Error: ' + result.message);
+                alert('Error: ' + result.errors);
             }
         } catch (error) {
             console.error('Error:', error);

@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const urlParams = new URLSearchParams(window.location.search);
     const productId = urlParams.get('id');
 
@@ -22,14 +22,23 @@ document.addEventListener('DOMContentLoaded', function() {
                 document.getElementById('product-category').textContent = producto.categoria;
                 document.getElementById('product-stock').textContent = producto.stock;
 
+                const quantityInput = document.getElementById('quantity');
+                quantityInput.min = 1;
+                quantityInput.max = producto.stock;
+
                 const addToCartButton = document.getElementById('add-to-cart-button');
-                addToCartButton.addEventListener('click', function() {
-                    const quantity = parseInt(document.getElementById('quantity').value);
+                addToCartButton.addEventListener('click', function () {
+                    const quantity = parseInt(quantityInput.value);
+                    if (quantity > producto.stock) {
+                        alert('Cantidad excede stock del producto');
+                        return;
+                    }
+
                     const existingItem = cart.find(item => item.id === producto.id);
                     if (existingItem) {
                         existingItem.cantidad += quantity;
                     } else {
-                        cart.push({ ...producto, cantidad: quantity });
+                        cart.push({ ...producto, cantidad: quantity, stock: producto.stock });
                     }
                     saveCart();
                     alert('Producto agregado al carrito');
