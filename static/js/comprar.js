@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     // Carrito productos
     const productosCarrito = document.getElementById('productos-carrito');
-    let total = 10; // Delivery cost
+    let total = 6; // Delivery cost
 
     if (carrito.length === 0) {
         productosCarrito.innerHTML = '<p>El carrito está vacío.</p>';
@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         }
 
         // Prepare WhatsApp message
-        const productosTexto = carrito.map(p => `${p.nombre} - Cantidad: ${p.cantidad} - Teléfono del vendedor: ${p.telefonoVendedor}`).join('%0A');
+        const productosTexto = carrito.map(p => `${p.nombre} - Cantidad: ${p.cantidad}`).join('%0A');
         const mensaje = `Resumen de compra:%0ANombre: ${compradorNombre}%0AApellido: ${compradorApellido}%0ADirección de envío: ${compradorDireccion}%0ADNI: ${compradorDni}%0AProductos:%0A${productosTexto}%0ASubtotal: S/. ${total.toFixed(2)}`;
 
         window.location.href = `https://wa.me/${numeroTelefono}?text=${mensaje}`;
