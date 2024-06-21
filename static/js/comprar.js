@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', async function () {
     const carrito = JSON.parse(localStorage.getItem('cart')) || [];
-    const numeroTelefono = "937020779"; // Tu número de teléfono
+    const numeroTelefono = "980817837"; // Tu número de teléfono
 
     // Carrito productos
     const productosCarrito = document.getElementById('productos-carrito');
