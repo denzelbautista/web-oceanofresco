@@ -6,16 +6,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const phoneContainer = document.getElementById('phone-container');
     const phoneInput = document.getElementById('telefono');
 
-    roleSelect.addEventListener('change', function () {
-        if (roleSelect.value === 'vendedor') {
-            phoneContainer.style.display = 'block';
-            phoneInput.required = true;
-        } else {
-            phoneContainer.style.display = 'none';
-            phoneInput.required = false;
-            phoneInput.value = ''; // Clear the phone input value if hidden
-        }
-    });
 
     inputs.forEach(input => {
         input.addEventListener('input', validateInput);

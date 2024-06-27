@@ -41,8 +41,12 @@ document.addEventListener('DOMContentLoaded', function () {
                 saveCart();
                 renderCart();
             } else {
-                alert('Cantidad excede stock del producto');
+                alertBox.style.display = 'block';
+                alertBox.classList.remove('alert-success');
+                alertBox.classList.add('alert-danger');
+                alertBox.innerText = 'Cantidad excede stock del producto';
                 event.target.value = cart[index].cantidad;
+                return;
             }
         }
     });

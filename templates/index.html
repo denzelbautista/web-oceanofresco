@@ -2,6 +2,13 @@
 {% extends "base.html" %}
 
 {% block content %}
+
+
+<head>
+  <!-- css propios -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+</head>
+
 <div class="main-banner">
   <div class="container">
     <div class="row">
@@ -14,9 +21,16 @@
             Frescos y sostenibles directamente del océano. ¡Bienvenido a bordo!</p>
           <div class="search-input">
             <form id="search" action="/shop">
-              <input type="text" placeholder="Click para ir a la tienda ->" id='searchText' name="searchKeyword"
+              <input type="text" placeholder="¿Deseas comprar?" id='searchText' name="searchKeyword"
                 onkeypress="handle" readonly />
-              <button role="button">IR A LA TIENDA</button>
+              <button role="button">Tienda AQUÍ</button>
+            </form>
+          </div>
+          <div class="search-input">
+            <form id="search" action="/registroproducto">
+              <input type="text" placeholder="¿Eres pescador?" id='searchText' name="searchKeyword"
+                onkeypress="handle" readonly />
+              <button role="button">Publica AQUÍ</button>
             </form>
           </div>
         </div>

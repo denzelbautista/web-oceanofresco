@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
     const urlParams = new URLSearchParams(window.location.search);
     const productId = urlParams.get('id');
+    const alertBox = document.getElementById('alert');
 
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
@@ -30,18 +31,38 @@ document.addEventListener('DOMContentLoaded', function () {
                 addToCartButton.addEventListener('click', function () {
                     const quantity = parseInt(quantityInput.value);
                     if (quantity > producto.stock) {
-                        alert('Cantidad excede stock del producto');
+                        alertBox.style.display = 'block';
+                        alertBox.classList.remove('alert-success');
+                        alertBox.classList.add('alert-danger');
+                        alertBox.innerText = 'Cantidad excede stock del producto';
                         return;
                     }
 
                     const existingItem = cart.find(item => item.id === producto.id);
                     if (existingItem) {
-                        existingItem.cantidad += quantity;
+                        alertBox.style.display = 'block';
+                        alertBox.classList.remove('alert-success');
+                        alertBox.classList.add('alert-again');
+                        alertBox.innerText = 'Producto ya agregado, modificar en carrito';
+
+                                  // Ocultar el alertBox después de 5 segundos (5000 milisegundos)
+                    setTimeout(() => {
+                        alertBox.style.display = 'none';
+                    }, 1000);
+                        return;
                     } else {
                         cart.push({ ...producto, cantidad: quantity, stock: producto.stock });
                     }
                     saveCart();
-                    alert('Producto agregado al carrito');
+                    alertBox.style.display = 'block';
+                    alertBox.classList.remove('alert-danger');
+                    alertBox.classList.add('alert-success');
+                    alertBox.innerText = 'Producto agregado al carrito'; // cuando se agrega correctamente
+    
+                     // Ocultar el alertBox después de 5 segundos (5000 milisegundos)
+                    setTimeout(() => {
+                        alertBox.style.display = 'none';
+                    }, 1000);
                 });
             } else {
                 alert('Error al cargar detalles del producto.');
