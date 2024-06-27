@@ -35,6 +35,9 @@ document.addEventListener('DOMContentLoaded', function () {
                         alertBox.classList.remove('alert-success');
                         alertBox.classList.add('alert-danger');
                         alertBox.innerText = 'Cantidad excede stock del producto';
+                        setTimeout(() => {
+                            alertBox.style.display = 'none';
+                        }, 1000);
                         return;
                     }
 
@@ -43,7 +46,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         alertBox.style.display = 'block';
                         alertBox.classList.remove('alert-success');
                         alertBox.classList.add('alert-again');
-                        alertBox.innerText = 'Producto ya agregado, modificar en carrito';
+                        alertBox.innerText = 'Producto ya agregado, modificar cantidad en carrito';
 
                                   // Ocultar el alertBox después de 5 segundos (5000 milisegundos)
                     setTimeout(() => {

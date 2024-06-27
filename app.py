@@ -105,6 +105,29 @@ def get_productos():
         print(sys.exc_info())
         return jsonify({'success': False, 'message': 'Error obteniendo productos'}), 500
 
+@app.route('/productos_por_usuario', methods=['GET'])
+@login_required
+def get_productos_por_usuario():
+    try:
+        usuario_id = current_user.id  # Asumiendo que current_user tiene un atributo id
+        productos = Producto.query.filter_by(vendedor_id=usuario_id).all()  # Filtra productos por usuario_id
+        productos_list = []
+        for producto in productos:
+            if hasattr(producto, 'imagen_producto') and producto.imagen_producto:  # Verifica si el campo imagen existe y tiene contenido
+                productos_list.append({
+                    'id': producto.id,
+                    'nombre': producto.nombre,
+                    'descripcion': producto.descripcion,
+                    'precio': producto.precio,
+                    'categoria': producto.categoria,
+                    'stock': producto.stock,
+                    'imagen_producto': producto.imagen_producto
+                })
+        return jsonify({'success': True, 'productos': productos_list}), 200
+    except Exception as e:
+        print(sys.exc_info())
+        return jsonify({'success': False, 'message': 'Error obteniendo productos por usuario'}), 500
+
 @app.route('/productos/<id>', methods=['GET'])
 def get_producto(id):
     try:

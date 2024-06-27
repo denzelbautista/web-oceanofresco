@@ -1,0 +1,35 @@
+<!-- index.html -->
+{% extends "base.html" %}
+
+{% block content %}
+<head>
+    <!-- css propios -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/misproductos.css') }}">
+</head>
+
+
+<div class="page-heading header-text">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h3>Mis Productos</h3>
+                <span class="breadcrumb"><a href="#">Home</a> > Mis Productos</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="containermisproductos">
+    <div class="row" id="misproductos-container">
+      <!-- Aquí se cargarán los productos del usuario logueado dinámicamente -->
+    </div>
+    <ul class="pagination">
+      <!-- Aquí se agregarán los enlaces de paginación dinámicamente -->
+    </ul>
+  </div>
+
+
+<!-- javascript propios -->
+<script src="{{ url_for('static', filename='js/misproductos.js') }}"></script>
+
+{% endblock %}

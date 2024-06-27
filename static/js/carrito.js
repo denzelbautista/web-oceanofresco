@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const alertBox = document.getElementById('alert');
 
     function saveCart() {
         localStorage.setItem('cart', JSON.stringify(cart));
@@ -46,6 +47,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 alertBox.classList.add('alert-danger');
                 alertBox.innerText = 'Cantidad excede stock del producto';
                 event.target.value = cart[index].cantidad;
+                setTimeout(() => {
+                    alertBox.style.display = 'none';
+                }, 1000);
                 return;
             }
         }
