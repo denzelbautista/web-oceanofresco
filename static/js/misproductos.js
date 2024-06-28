@@ -50,10 +50,18 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
 
-        document.querySelectorAll('.buy-button').forEach(button => {
+        document.querySelectorAll('.edit-button').forEach(button => {
             button.addEventListener('click', function () {
                 const productId = this.getAttribute('data-id');
-                window.location.href = `/detallesproducto?id=${productId}`;
+                window.location.href = `/editarproducto?id=${productId}`;
+            });
+        });
+        document.querySelectorAll('.delete-button').forEach(button => {
+            button.addEventListener('click', function () {
+                const productId = this.getAttribute('data-id');
+                // aqui se hará un llamado al endpoint para eliminar el producto, primero 
+                // se mostrará un mensaje de confirmación y luego se eliminará el producto.
+                // window.location.href = `/detallesproducto?id=${productId}`;
             });
         });
     }

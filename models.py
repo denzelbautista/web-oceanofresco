@@ -69,7 +69,7 @@ class Producto(db.Model):
     nombre = db.Column(db.String, nullable=False)
     descripcion = db.Column(db.Text, nullable=False)
     precio = db.Column(db.Numeric(10, 2), nullable=False)
-    categoria = db.Column(db.Enum('pescado', 'marisco', 'accesorios_nauticos', 'equipos_de_pesca', 'ropa_accesorios', name='product_categories'), nullable=False)
+    categoria = db.Column(db.Enum('pescado', 'marisco', name='product_categories'), nullable=False)
     stock = db.Column(db.Integer, nullable=False)
     vendedor_id = db.Column(db.String(36), db.ForeignKey('usuarios.id'), nullable=False)
     imagen_producto = db.Column(db.String(500), nullable=False)

@@ -37,6 +37,11 @@ def detallesproducto():
     product_id = request.args.get('id')
     return render_template('detallesproducto.html', product_id=product_id)
 
+@views_bp.route('/editarproducto')
+def editarproducto():
+    product_id = request.args.get('id')
+    return render_template('editarproducto.html', product_id=product_id)
+
 @views_bp.route('/registroproducto')
 @login_required
 def registroproducto():
