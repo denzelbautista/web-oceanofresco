@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                 },
                 body: JSON.stringify({ cantidad: producto.cantidad })
             });
-            
+
             const result = await response.json();
             if (!result.success) {
                 alert(`Error con el producto ${producto.nombre}: ${result.message}`);
