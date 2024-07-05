@@ -15,6 +15,7 @@ document.addEventListener('DOMContentLoaded', function () {
             if (data.success) {
                 const producto = data.producto;
                 document.getElementById('product-name').textContent = producto.nombre;
+                document.getElementById('product-name2').textContent = producto.nombre;
                 document.getElementById('product-image').src = producto.imagen_producto;
                 document.getElementById('product-price').textContent = `S/. ${producto.precio}`;
                 document.getElementById('old-price').textContent = `S/. ${parseFloat(producto.precio) + 5}`;
@@ -48,10 +49,10 @@ document.addEventListener('DOMContentLoaded', function () {
                         alertBox.classList.add('alert-again');
                         alertBox.innerText = 'Producto ya agregado, modificar cantidad en carrito';
 
-                                  // Ocultar el alertBox después de 5 segundos (5000 milisegundos)
-                    setTimeout(() => {
-                        alertBox.style.display = 'none';
-                    }, 1000);
+                        // Ocultar el alertBox después de 5 segundos (5000 milisegundos)
+                        setTimeout(() => {
+                            alertBox.style.display = 'none';
+                        }, 1000);
                         return;
                     } else {
                         cart.push({ ...producto, cantidad: quantity, stock: producto.stock });
@@ -61,8 +62,8 @@ document.addEventListener('DOMContentLoaded', function () {
                     alertBox.classList.remove('alert-danger');
                     alertBox.classList.add('alert-success');
                     alertBox.innerText = 'Producto agregado al carrito'; // cuando se agrega correctamente
-    
-                     // Ocultar el alertBox después de 5 segundos (5000 milisegundos)
+
+                    // Ocultar el alertBox después de 5 segundos (5000 milisegundos)
                     setTimeout(() => {
                         alertBox.style.display = 'none';
                     }, 1000);

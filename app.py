@@ -177,6 +177,21 @@ def update_product(producto_id):
         return jsonify({'success': True, 'message': 'Stock actualizado'}), 200
     else:
         return jsonify({'success': False, 'message': 'Stock insuficiente'}), 400
+    
+@app.route('/productos/<id>', methods=['DELETE'])
+def delete_producto(id):
+    try:
+        producto = Producto.query.get(id)
+        if producto:
+            db.session.delete(producto)
+            db.session.commit()
+            return jsonify({'success': True, 'message': 'Producto eliminado correctamente'}), 200
+        else:
+            return jsonify({'success': False, 'message': 'Producto no encontrado'}), 404
+    except Exception as e:
+        db.session.rollback()
+        print(sys.exc_info())
+        return jsonify({'success': False, 'message': 'Error eliminando producto'}), 500
 
 @app.route('/usuario/<product_id>/producto', methods=['GET'])
 def get_usuario_by_product_id(product_id):

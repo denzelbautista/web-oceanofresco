@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const itemsPerPage = 12;
     let currentPage = 1;
     let productos = [];
+    let productoIdToDelete = null;
 
     function fetchProductos() {
         fetch('/productos_por_usuario')
@@ -21,7 +22,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function renderProductos() {
-        const container = document.getElementById('misproductos-container');
         container.innerHTML = '';
         const start = (currentPage - 1) * itemsPerPage;
         const end = start + itemsPerPage;
@@ -46,7 +46,6 @@ document.addEventListener('DOMContentLoaded', function () {
                     </div>
                 `;
                 container.appendChild(productoDiv);
-
             }
         });
 
@@ -56,16 +55,14 @@ document.addEventListener('DOMContentLoaded', function () {
                 window.location.href = `/editarproducto?id=${productId}`;
             });
         });
+
         document.querySelectorAll('.delete-button').forEach(button => {
             button.addEventListener('click', function () {
-                const productId = this.getAttribute('data-id');
-                // aqui se hará un llamado al endpoint para eliminar el producto, primero 
-                // se mostrará un mensaje de confirmación y luego se eliminará el producto.
-                // window.location.href = `/detallesproducto?id=${productId}`;
+                productoIdToDelete = this.getAttribute('data-id');
+                showDeleteModal();
             });
         });
     }
-
 
     function setupPagination() {
         pagination.innerHTML = '';
@@ -86,6 +83,53 @@ document.addEventListener('DOMContentLoaded', function () {
             li.appendChild(a);
             pagination.appendChild(li);
         }
+    }
+
+    function showDeleteModal() {
+        const modal = document.getElementById('deleteModal');
+        const closeModal = document.querySelector('.close');
+        const confirmDelete = document.getElementById('confirmDelete');
+        const cancelDelete = document.getElementById('cancelDelete');
+
+        modal.style.display = 'block';
+
+        closeModal.onclick = function () {
+            modal.style.display = 'none';
+        }
+
+        cancelDelete.onclick = function () {
+            modal.style.display = 'none';
+        }
+
+        confirmDelete.onclick = function () {
+            deleteProducto(productoIdToDelete);
+            modal.style.display = 'none';
+        }
+
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+    }
+
+    function deleteProducto(id) {
+        fetch(`/productos/${id}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Producto eliminado correctamente.');
+                    fetchProductos();
+                } else {
+                    alert('Error al eliminar producto.');
+                }
+            })
+            .catch(error => console.error('Error:', error));
     }
 
     fetchProductos();
