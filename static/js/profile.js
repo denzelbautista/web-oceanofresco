@@ -1,6 +1,8 @@
 document.addEventListener("DOMContentLoaded", function () {
     const editProfileBtn = document.getElementById("edit-profile-btn");
-    const readOnlyFields = document.querySelectorAll("input[readonly], textarea[readonly]");
+    const profileImageInput = document.getElementById("profile-image-input");
+    const profileImageInputContainer = document.getElementById("profile-image-input-container");
+    const userImage = document.getElementById("user-image");
     const editableFields = document.querySelectorAll(".editable-fields input, .editable-fields textarea");
 
     // Función para cambiar la propiedad 'readonly' de los campos editables
@@ -29,13 +31,13 @@ document.addEventListener("DOMContentLoaded", function () {
             if (response.ok) {
                 const usuario = data.usuario;
                 // Actualizar los campos con los datos del usuario
-                document.getElementById("nombre").value = usuario.nombre;
-                document.getElementById("apellido").value = usuario.apellido;
-                document.getElementById("email").value = usuario.email;
+                document.getElementById("nombre").textContent = usuario.nombre;
+                document.getElementById("apellido").textContent = usuario.apellido;
+                document.getElementById("email").textContent = usuario.email;
                 document.getElementById("nombre-empresa").value = usuario.nombre_empresa || "";
                 document.getElementById("telefono").value = usuario.telefono || "";
                 document.getElementById("descripcion").value = usuario.descripcion || "";
-                document.getElementById("direccion-envio").value = usuario.direccion_envio || "";
+                userImage.src = usuario.imagen_usuario || "path/to/default-image.jpg";
             } else {
                 console.error("Error al cargar los datos del usuario:", data.error);
             }
@@ -46,19 +48,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Función para enviar los datos actualizados del perfil al servidor
     async function updateUserData() {
-        const formData = {
-            nombre_empresa: document.getElementById("nombre-empresa").value,
-            telefono: document.getElementById("telefono").value,
-            descripcion: document.getElementById("descripcion").value,
-            direccion_envio: document.getElementById("direccion-envio").value
-        };
+        const formData = new FormData();
+        formData.append('nombre_empresa', document.getElementById("nombre-empresa").value);
+        formData.append('telefono', document.getElementById("telefono").value);
+        formData.append('descripcion', document.getElementById("descripcion").value);
+        const imageFile = profileImageInput.files[0];
+        if (imageFile) {
+            formData.append('image', imageFile);
+        }
+
         try {
             const response = await fetch("/usuarios", {
                 method: "PATCH",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(formData)
+                body: formData
             });
             const data = await response.json();
             if (response.ok) {
@@ -67,6 +69,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 toggleEditable();
                 // Cambiar el texto del botón de nuevo a "Editar Perfil"
                 toggleButtonText();
+                // Ocultar el input de subir imagen
+                profileImageInputContainer.style.display = "none";
                 // Recargar los datos del usuario
                 loadUserData();
             } else {
@@ -84,9 +88,23 @@ document.addEventListener("DOMContentLoaded", function () {
             toggleEditable();
             // Cambiar el texto del botón a "Guardar Cambios"
             toggleButtonText();
+            // Mostrar el input de subir imagen
+            profileImageInputContainer.style.display = "block";
         } else {
             // Enviar los datos actualizados del perfil al servidor
             updateUserData();
+        }
+    });
+
+    // Previsualizar la imagen seleccionada antes de enviarla
+    profileImageInput.addEventListener("change", function () {
+        const file = profileImageInput.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                userImage.src = e.target.result;
+            }
+            reader.readAsDataURL(file);
         }
     });
 

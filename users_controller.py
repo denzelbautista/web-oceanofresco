@@ -1,5 +1,7 @@
 # users_controller.py
 from flask import Blueprint, abort, request, jsonify, render_template
+import requests
+from database import init_app, db
 from models import Usuario
 from config.local import config
 from utilities import verificar_contrasena
@@ -125,7 +127,7 @@ def get_current_user():
 
     return jsonify({'success': True, 'usuario': usuario.serialize()}), 200
 
-# Actualizar el perfil del usuario
+
 @users_bp.route('/usuarios', methods=['PATCH'])
 @login_required
 def update_user():
@@ -133,13 +135,35 @@ def update_user():
     if not usuario:
         return jsonify({'error': 'Usuario no autorizado para editar este perfil'}), 403
 
-    nombre_empresa = request.form.get('nombre_empresa')
-    nombre_empresa = request.form.get('telefono')
-    nombre_empresa = request.form.get('nombre_empresa')
+    data = request.form
 
-    usuario_update_id = usuario.insert()  # Guardar los cambios en la base de datos
+    # Actualizar los campos editables
+    usuario.nombre_empresa = data.get('nombre_empresa', usuario.nombre_empresa)
+    usuario.telefono = data.get('telefono', usuario.telefono)
+    usuario.descripcion = data.get('descripcion', usuario.descripcion)
 
-    return jsonify({'message': 'Perfil de usuario actualizado exitosamente', 'id': usuario_update_id}), 200
+    # Manejar la subida de la imagen de perfil
+    if 'image' in request.files:
+        file = request.files['image']
+        if file.filename != '':
+            response = requests.post(
+                'https://api.imgbb.com/1/upload',
+                data={'key': '2adc25aee373fb46c2d721f17defe3d4'},  # Reemplaza con tu clave de API de imgBB
+                files={'image': file}
+            )
+            if response.status_code == 200:
+                image_url = response.json()['data']['url']
+                usuario.imagen_usuario = image_url
+            else:
+                return jsonify({'success': False, 'message': 'Error subiendo imagen a imgbb'}), 500
+
+    try:
+        db.session.commit()
+        return jsonify({'message': 'Perfil de usuario actualizado exitosamente'}), 200
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({'error': 'Error actualizando perfil de usuario'}), 500
+
 
 
 # Ruta protegida de ejemplo

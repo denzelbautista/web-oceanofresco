@@ -28,52 +28,49 @@
                 </div>
                 <div class="card-body">
                     <div class="text-center">
-                        <img src="" alt="Imagen de perfil" class="img-fluid rounded-circle mb-3" id="user-image">
+                        <img src="" alt="Imagen de perfil" id="user-image"
+                            style="width: 150px; height: 150px; object-fit: cover; border-radius: 50%;">
+                        <div id="profile-image-input-container" style="display: none;">
+                            <input type="file" id="profile-image-input" accept="image/*">
+                        </div>
                     </div>
                     <!-- Campos inmutables -->
                     <div class="form-group">
-                        <label for="nombre">Nombre</label>
-                        <input type="text" class="form-control" id="nombre" readonly>
+                        <h4>Nombre:</h4>
+                        <div id="nombre" class="form-control-plaintext"></div>
                     </div>
                     <div class="form-group">
-                        <label for="apellido">Apellido</label>
-                        <input type="text" class="form-control" id="apellido" readonly>
+                        <h4>Apellido:</h4>
+                        <div id="apellido" class="form-control-plaintext"></div>
                     </div>
                     <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" class="form-control" id="email" readonly>
+                        <h4>Email:</h4>
+                        <div id="email" class="form-control-plaintext"></div>
                     </div>
                     <!-- Campos editables -->
                     <div class="editable-fields">
                         <div class="form-group">
-                            <label for="nombre-empresa">Nombre de la Empresa</label>
-                            <input type="text" class="form-control" id="nombre-empresa">
+                            <h4>Nombre Organización:</h4>
+                            <input type="text" class="form-control" id="nombre-empresa" readonly>
                         </div>
                         <div class="form-group">
-                            <label for="telefono">Teléfono</label>
-                            <input type="text" class="form-control" id="telefono">
+                            <h4>Telefono:</h4>
+                            <input type="text" class="form-control" id="telefono" readonly>
                         </div>
                         <div class="form-group">
-                            <label for="descripcion">Descripción</label>
-                            <textarea class="form-control" id="descripcion" rows="3"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="direccion-envio">Dirección de Envío</label>
-                            <input type="text" class="form-control" id="direccion-envio">
+                            <h4>Descripción:</h4>
+                            <textarea class="form-control" id="descripcion" rows="3" readonly></textarea>
                         </div>
                     </div>
                     <!-- Botón Editar/Guardar -->
                     <div class="botons">
                         <button type="button" class="btn btn-primary mt-3" id="edit-profile-btn">Editar Perfil</button>
-                        <button type="button" class="btn btn-primary mt-3" id="edit-profile-pic-btn">Editar Foto de Perfil</button>
-                        
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
 
 
 <!-- javascript propios -->
