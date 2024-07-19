@@ -161,22 +161,29 @@ def update_stock(producto_id):
     else:
         return jsonify({'success': False, 'message': 'Stock insuficiente'}), 400
 
-@app.route('/productos/<producto_id>', methods=['PATCH'])
+@app.route('/productos2/<producto_id>', methods=['PATCH'])
 def update_product(producto_id):
     producto = Producto.query.get_or_404(producto_id)
-    cantidad = request.json.get('cantidad')
     precio = request.json.get('precio')
     stock = request.json.get('stock')
     nombre = request.json.get('nombre')
     descripcion = request.json.get('descripcion')
-    
-    
-    if producto.stock >= cantidad:
-        producto.stock -= cantidad
-        db.session.commit()
-        return jsonify({'success': True, 'message': 'Stock actualizado'}), 200
-    else:
-        return jsonify({'success': False, 'message': 'Stock insuficiente'}), 400
+    categoria = request.json.get('categoria')
+
+    if nombre:
+        producto.nombre = nombre
+    if descripcion:
+        producto.descripcion = descripcion
+    if precio:
+        producto.precio = precio
+    if stock is not None:  # Check explicitly for None to allow 0 stock
+        producto.stock = stock
+    if categoria:
+        producto.categoria = categoria
+
+    db.session.commit()
+    return jsonify({'message': 'Producto actualizado correctamente'}), 200
+
     
 @app.route('/productos/<id>', methods=['DELETE'])
 def delete_producto(id):
