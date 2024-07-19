@@ -92,229 +92,33 @@
   </div>
 </div>
 
-<div class="section trending">
+<!-- Inicio de los videos -->
+<div class="video-section">
   <div class="container">
     <div class="row">
       <div class="col-lg-6">
-        <div class="section-heading">
-          <h6>Tendencia</h6>
-          <h2>Productos en tendencia</h2>
+        <div class="video-container">
+          <iframe width="770" height="630" src="https://www.youtube.com/embed/m65GzBKsHiA?si=pG0WE3TZPhrOxprl"
+            title="YouTube video player" frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          <p class="video-description">Este video te muestra cómo utilizar nuestra página como comprador.</p>
         </div>
       </div>
       <div class="col-lg-6">
-        <div class="main-button">
-          <a href="{{ url_for('views.shop') }}">Ver TODOS</a>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-6">
-        <div class="item">
-          <div class="thumb">
-            <a href="product-details.html"><img src="{{ url_for('static', filename='assets/images/cania.jpeg') }}"
-                alt=""></a>
-            <span class="price"><em>S/.28</em>S/.20</span>
-          </div>
-          <div class="down-content">
-            <span class="category">Equipos de pesca</span>
-            <h4>Caña de pescar</h4>
-            <a href="product-details.html"><i class="fa fa-shopping-bag"></i></a>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-6">
-        <div class="item">
-          <div class="thumb">
-            <a href="product-details.html"><img src="{{ url_for('static', filename='assets/images/bonito.jpg') }}"
-                alt=""></a>
-            <span class="price">S/.44</span>
-          </div>
-          <div class="down-content">
-            <span class="category">Pescados Frescos</span>
-            <h4>Bonito</h4>
-            <a href="product-details.html"><i class="fa fa-shopping-bag"></i></a>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-6">
-        <div class="item">
-          <div class="thumb">
-            <a href="product-details.html"><img src="{{ url_for('static', filename='assets/images/remo.jpeg') }}"
-                alt=""></a>
-            <span class="price"><em>S/.64</em>S/.44</span>
-          </div>
-          <div class="down-content">
-            <span class="category">Accesorios Náuticos</span>
-            <h4>Par de remos de cedro</h4>
-            <a href="product-details.html"><i class="fa fa-shopping-bag"></i></a>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-6">
-        <div class="item">
-          <div class="thumb">
-            <a href="product-details.html"><img src="{{ url_for('static', filename='assets/images/chaleco.jpeg') }}"
-                alt=""></a>
-            <span class="price">S/.32</span>
-          </div>
-          <div class="down-content">
-            <span class="category">Ropa y Accesorios</span>
-            <h4>Chaleco con multiples bolsillos</h4>
-            <a href="product-details.html"><i class="fa fa-shopping-bag"></i></a>
-          </div>
+        <div class="video-container">
+          <iframe width="160" height="630" src="https://www.youtube.com/embed/ePJ29ycSw8o?si=aDIEmwvfMqYEjZDV"
+            title="YouTube video player" frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          <p class="video-description">Este video te enseña cómo manejar nuestra página eficientemente.</p>
         </div>
       </div>
     </div>
   </div>
 </div>
+<!-- Fin de los videos -->
 
-<div class="section most-played">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-6">
-        <div class="section-heading">
-          <h6>LOS MEJORES PRODUCTOS</h6>
-          <h2>Más comprados</h2>
-        </div>
-      </div>
-      <div class="col-lg-6">
-        <div class="main-button">
-          <a href="shop.html">Ver TODOS</a>
-        </div>
-      </div>
-      <div class="col-lg-2 col-md-6 col-sm-6">
-        <div class="item">
-          <div class="thumb">
-            <a href="product-details.html"><img src="{{ url_for('static', filename='assets/images/caballa.jpg') }}"
-                alt=""></a>
-          </div>
-          <div class="down-content">
-            <span class="category">Pescados Frescos</span>
-            <h4>Caballa</h4>
-            <a href="product-details.html">Explora</a>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-2 col-md-6 col-sm-6">
-        <div class="item">
-          <div class="thumb">
-            <a href="product-details.html"><img src="{{ url_for('static', filename='assets/images/jurel.jpg') }}"
-                alt=""></a>
-          </div>
-          <div class="down-content">
-            <span class="category">Pescados Frescos</span>
-            <h4>Jurel</h4>
-            <a href="product-details.html">Explora</a>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-2 col-md-6 col-sm-6">
-        <div class="item">
-          <div class="thumb">
-            <a href="product-details.html"><img src="{{ url_for('static', filename='assets/images/trucha.jpg') }}"
-                alt=""></a>
-          </div>
-          <div class="down-content">
-            <span class="category">Pescados Frescos</span>
-            <h4>Trucha</h4>
-            <a href="product-details.html">Explora</a>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-2 col-md-6 col-sm-6">
-        <div class="item">
-          <div class="thumb">
-            <a href="product-details.html"><img src="{{ url_for('static', filename='assets/images/lenguado.jpg') }}"
-                alt=""></a>
-          </div>
-          <div class="down-content">
-            <span class="category">Pescados Frescos</span>
-            <h4>Lenguado</h4>
-            <a href="product-details.html">Explora</a>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-2 col-md-6 col-sm-6">
-        <div class="item">
-          <div class="thumb">
-            <a href="product-details.html"><img src="{{ url_for('static', filename='assets/images/bonito.jpg') }}"
-                alt=""></a>
-          </div>
-          <div class="down-content">
-            <span class="category">Pescados Frescos</span>
-            <h4>Bonito</h4>
-            <a href="product-details.html">Explora</a>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-2 col-md-6 col-sm-6">
-        <div class="item">
-          <div class="thumb">
-            <a href="product-details.html"><img src="{{ url_for('static', filename='assets/images/anchoveta.jpeg') }}"
-                alt=""></a>
-          </div>
-          <div class="down-content">
-            <span class="category">Pescados Frescos</span>
-            <h4>Anchoveta</h4>
-            <a href="product-details.html">Explora</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="section categories">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-12 text-center">
-        <div class="section-heading">
-          <h6>Categorias</h6>
-          <h2>Nuestras categorías</h2>
-        </div>
-      </div>
-      <div class="col-lg col-sm-6 col-xs-12">
-        <div class="item">
-          <h4>Pescados Frescos</h4>
-          <div class="thumb">
-            <a href="/shop"><img src="{{ url_for('static', filename='assets/images/pescadosfrescos.jpeg') }}"
-                alt=""></a>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg col-sm-6 col-xs-12">
-        <div class="item">
-          <h4>Mariscos</h4>
-          <div class="thumb">
-            <a href="/shop"><img src="{{ url_for('static', filename='assets/images/mariscos.jpeg') }}" alt=""></a>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg col-sm-6 col-xs-12">
-        <div class="item">
-          <h4>Equipos de Pesca - Proximamente</h4>
-          <div class="thumb">
-            <a href="/"><img src="{{ url_for('static', filename='assets/images/accesoriospesca.jpeg') }}" alt=""></a>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg col-sm-6 col-xs-12">
-        <div class="item">
-          <h4>Ropa y Accesorios - Proximamente</h4>
-          <div class="thumb">
-            <a href="/"><img src="{{ url_for('static', filename='assets/images/indumentarias.jpeg') }}" alt=""></a>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg col-sm-6 col-xs-12">
-        <div class="item">
-          <h4>Accesorios Náuticos - Proximamente</h4>
-          <div class="thumb">
-            <a href="/"><img src="{{ url_for('static', filename='assets/images/nauticos.jpeg') }}" alt=""></a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
 
 <div class="section cta">
   <div class="container">
