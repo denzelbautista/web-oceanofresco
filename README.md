@@ -1,4 +1,5 @@
-# ChallwaCom Web
+# Oceano Fresco
+La primera plataforma web para conectar consumidores con pescadores artesanales y comercio de pescados en mercados.
 
 1) Primer paso, crear el entorno virtual
 ```shell
